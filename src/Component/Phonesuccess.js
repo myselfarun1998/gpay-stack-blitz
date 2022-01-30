@@ -1,0 +1,44 @@
+import React from 'react';
+import './style.css';
+import { Link, Redirect } from 'react-router-dom';
+
+import {
+  Button,
+  Form,
+  Container,
+  FloatingLabel,
+  Row,
+  Col,
+  Card,
+} from 'react-bootstrap';
+import check from '../img/check.png';
+
+export default function Phonesuccess() {
+  const returnBack = () => {
+    <Redirect to="/" />;
+  };
+  return (
+    <div className="mybody">
+      <h1>Phonesuccess</h1>
+
+      <div className="card">
+        <div className="test">
+          <h1 className="paid">Paid succesfully</h1>
+          <h1 className="amt">amt</h1>
+          <h1 className="to">TO:</h1>
+          <h1 className="trans">Transaction id:</h1>
+        </div>
+        <Link to="/">
+          {' '}
+          <button onClick={returnBack} className="close">
+            close
+          </button>
+        </Link>
+      </div>
+      <img
+        className="myimg"
+        src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png"
+      />
+    </div>
+  );
+}
