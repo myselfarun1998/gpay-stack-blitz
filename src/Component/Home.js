@@ -39,10 +39,6 @@ const Home = () => {
           </Link>
         </Col>
       </Row>
-      <div>
-        <Link to="/">home</Link>
-      </div>
-      hello
     </div>
   );
 };

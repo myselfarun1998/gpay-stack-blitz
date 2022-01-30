@@ -40,7 +40,7 @@ export default function Upi() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userUpi);
-    console.log(phoneInput);
+    // console.log(phoneInput);
     if (!userUpi.name) {
       alert('name is emty');
     } else if (!userUpi.upi) {
@@ -53,12 +53,12 @@ export default function Upi() {
       });
     }
   };
-
+  console.log(userUpi);
   return (
     <div>
       <h1 className="upitransfer">UPI Transfer</h1>
       {userUpi.show ? (
-        <Phonesuccess mydata={userUpi} />
+        <Upisuccess mydata={userUpi} />
       ) : (
         <Container>
           <Row>

@@ -35,6 +35,10 @@ const PassWord = (props) => {
   const validation = () => {
     if (defpwd === pwd) {
       valid = 'noerror';
+      setpassword(' ');
+      setmypass1(' ');
+      setmypass2(' ');
+      setmypass3(' ');
       if (location.state) {
         console.log(location.state.data);
         console.log(location.state.val);
@@ -43,17 +47,18 @@ const PassWord = (props) => {
             pathname: '/banksuccess',
             state: location.state.val,
           });
+          // history.push("/banksuccess");
         } else if (location.state.data === 'phone') {
           history.push({
             pathname: '/phonesuccess',
             state: location.state.val,
           });
+        } else if (location.state.data === 'upi') {
+          history.push({
+            pathname: '/upisuccess',
+            state: location.state.val,
+          });
         }
-      } else if (location.state.data === 'upi') {
-        history.push({
-          pathname: '/upisuccess',
-          state: location.state.val,
-        });
       } else {
         history.push('/home');
       }
