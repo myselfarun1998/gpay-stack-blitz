@@ -38,11 +38,17 @@ export default function App() {
           <Route path="/phone">
             <Phone />
           </Route>
+          <Route path="/banksuccess">
+            <Banksuccess />
+          </Route>
+          <Route path="/upisuccess">
+            <Upisuccess />
+          </Route>
           <Route path="/phonesuccess">
             <Phonesuccess />
           </Route>
           <Route path="/">
-            <Home />
+            <Password />
           </Route>
         </Switch>
       </Router>

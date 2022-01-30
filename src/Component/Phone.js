@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import {
   Button,
@@ -11,6 +12,33 @@ import {
 } from 'react-bootstrap';
 
 export default function Phone() {
+  const [phoneInput, setPhoneInput] = useState({
+    name: '',
+    phone: '',
+    amt: '',
+  });
+
+  const nameHandle = (event) => {
+    setPhoneInput((prev) => {
+      return { ...prev, name: event.target.value };
+    });
+  };
+  const phoneHandle = (event) => {
+    setPhoneInput((prev) => {
+      return { ...prev, phone: event.target.value };
+    });
+  };
+
+  const amtHandle = (event) => {
+    setPhoneInput((prev) => {
+      return { ...prev, amt: event.target.value };
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(phoneInput);
+  };
+
   const returnBack = () => {
     <Redirect to="/" />;
   };
@@ -21,10 +49,15 @@ export default function Phone() {
       <Container>
         <Row>
           <Col>
-            <form className="phoneform">
+            <form className="phoneform" onSubmit={handleSubmit}>
               <div class="mb-3">
                 <label class="form-label">Enter The Name</label>
-                <input type="text" class="form-control" />
+                <input
+                  type="text"
+                  class="form-control"
+                  value={phoneInput.name}
+                  onChange={nameHandle}
+                />
               </div>
               <div class="mb-3">
                 <label class="form-label">Enter The Phone Number</label>
@@ -33,6 +66,8 @@ export default function Phone() {
                   class="form-control"
                   minLength="10"
                   maxLength="10"
+                  value={phoneInput.phone}
+                  onChange={phoneHandle}
                 />
                 <div class="form-text">
                   We'll never share your Phone Number with anyone else.
@@ -44,6 +79,8 @@ export default function Phone() {
                   type="number"
                   class="form-control"
                   id="exampleInputPassword1"
+                  value={phoneInput.amt}
+                  onChange={amtHandle}
                 />
               </div>
 

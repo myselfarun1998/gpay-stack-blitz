@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.css';
 import { Link, Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
 import {
   Button,
   Form,
@@ -11,9 +12,42 @@ import {
 } from 'react-bootstrap';
 
 export default function Upi() {
+  const [userUpi, setUpi] = useState({
+    name1: '',
+    upi: '',
+    amt: '',
+  });
   const returnBack = () => {
     <Redirect to="/" />;
   };
+  // const [userUpi, setUpi] = useState({
+  //   name1: '',
+  //   upi: ' ',
+  //   amt: ' ',
+  // });
+
+  const nameHandler = (event) => {
+    setUpi((prev) => {
+      return { ...prev, name1: event.target.value };
+    });
+  };
+  const upiHandler = (event) => {
+    setUpi((prev) => {
+      return { ...prev, upi: event.target.value };
+    });
+  };
+
+  const amtHandle = (event) => {
+    setUpi((prev) => {
+      return { ...prev, amt: event.target.value };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userUpi);
+  };
+
   return (
     <div>
       <h1 className="upitransfer">UPI Transfer</h1>
@@ -21,10 +55,15 @@ export default function Upi() {
       <Container>
         <Row>
           <Col>
-            <form className="phoneform">
+            <form className="phoneform" onSubmit={handleSubmit}>
               <div class="mb-3">
                 <label class="form-label">Enter The Name</label>
-                <input type="text" class="form-control" />
+                <input
+                  type="text"
+                  class="form-control"
+                  value={userUpi.name}
+                  onChange={nameHandler}
+                />
               </div>
               <div class="mb-3">
                 <label class="form-label">Enter The UPI</label>
@@ -33,6 +72,8 @@ export default function Upi() {
                   class="form-control"
                   minLength="10"
                   maxLength="10"
+                  value={userUpi.upi}
+                  onChange={upiHandler}
                 />
                 <div class="form-text">
                   We'll never share your Phone Number with anyone else.
@@ -45,6 +86,8 @@ export default function Upi() {
                   type="number"
                   class="form-control"
                   id="exampleInputPassword1"
+                  onChange={amtHandle}
+                  value={userUpi.amt}
                 />
               </div>
 

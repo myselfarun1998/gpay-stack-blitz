@@ -6,6 +6,7 @@ const Banksuccess = (props) => {
   const returnBack = () => {
     <Redirect to="/phone" />;
   };
+  var count = 3;
   var valid = 'noerror';
   var defpwd = 'arun';
   var pwd = '';
@@ -37,12 +38,16 @@ const Banksuccess = (props) => {
   const validation = () => {
     if (defpwd === pwd) {
       valid = 'noerror';
-      <Link to="/">{returnBack}</Link>;
+      // <Link to="/">{returnBack}</Link>;
       console.log(valid);
       console.log(pwd);
+      setpassword(' ');
+      setmypass1(' ');
+      setmypass2(' ');
+      setmypass3(' ');
     } else {
       valid = 'error';
-      alert('incorrect');
+      alert(`${--count}   attempts left`);
     }
   };
   return (
