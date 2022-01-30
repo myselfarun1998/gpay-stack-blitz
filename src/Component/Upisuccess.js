@@ -12,7 +12,11 @@ import {
 } from 'react-bootstrap';
 import check from '../img/check.png';
 
-export default function Upisuccess() {
+export default function Upisuccess(props) {
+  const location = useLocation();
+  let val = location.state;
+  let transaction = Math.floor(100000 + Math.random() * 998777900000);
+  console.log(location.state);
   return (
     <div className="mybody">
       <h1>upu sucess</h1>
@@ -20,11 +24,13 @@ export default function Upisuccess() {
       <div className="card">
         <div className="test">
           <h1 className="paid">Paid succesfully</h1>
-          <h1 className="amt">amt</h1>
-          <h1 className="to">TO:</h1>
-          <h1 className="trans">Transaction id:</h1>
+          <h1 className="amt">Amount:{val.amt}</h1>
+          <h1 className="to">TO:{val.name}</h1>
+          <h1 className="trans">Transaction id:{transaction}</h1>
         </div>
-        <button className="close">close</button>
+        <Link to="/home">
+          <button className="close">close</button>
+        </Link>
       </div>
       <img
         className="myimg"

@@ -22,7 +22,7 @@ export default function Upi() {
 
   const nameHandler = (event) => {
     setUpi((prev) => {
-      return { ...prev, name1: event.target.value };
+      return { ...prev, name: event.target.value };
     });
   };
   const upiHandler = (event) => {
@@ -112,7 +112,7 @@ export default function Upi() {
                     Pay Now
                   </button>{' '}
                 </Link>
-                <Link to="/">
+                <Link to="/home">
                   {' '}
                   <button
                     type="submit"
