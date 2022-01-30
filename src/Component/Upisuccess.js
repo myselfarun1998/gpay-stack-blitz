@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -13,9 +13,6 @@ import {
 import check from '../img/check.png';
 
 export default function Upisuccess() {
-  const returnBack = () => {
-    <Redirect to="/" />;
-  };
   return (
     <div className="mybody">
       <h1>upu sucess</h1>

@@ -29,6 +29,9 @@ export default function App() {
 
       <Router>
         <Switch>
+          <Route path="/home">
+            <Home />
+          </Route>
           <Route path="/upi">
             <Upi />
           </Route>

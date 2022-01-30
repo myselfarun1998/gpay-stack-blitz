@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import Upisuccess from './Upisuccess';
 import { Link, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
 import {
@@ -13,18 +14,11 @@ import {
 
 export default function Upi() {
   const [userUpi, setUpi] = useState({
-    name1: '',
+    name: '',
     upi: '',
     amt: '',
+    show: false,
   });
-  const returnBack = () => {
-    <Redirect to="/" />;
-  };
-  // const [userUpi, setUpi] = useState({
-  //   name1: '',
-  //   upi: ' ',
-  //   amt: ' ',
-  // });
 
   const nameHandler = (event) => {
     setUpi((prev) => {
@@ -46,75 +40,95 @@ export default function Upi() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(userUpi);
+    console.log(phoneInput);
+    if (!userUpi.name) {
+      alert('name is emty');
+    } else if (!userUpi.upi) {
+      alert('number is emty');
+    } else if (!userUpi.amt) {
+      alert('amt is emty');
+    } else {
+      userUpi((prev) => {
+        return { ...prev, show: true };
+      });
+    }
   };
 
   return (
     <div>
       <h1 className="upitransfer">UPI Transfer</h1>
-
-      <Container>
-        <Row>
-          <Col>
-            <form className="phoneform" onSubmit={handleSubmit}>
-              <div class="mb-3">
-                <label class="form-label">Enter The Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  value={userUpi.name}
-                  onChange={nameHandler}
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Enter The UPI</label>
-                <input
-                  type="tel"
-                  class="form-control"
-                  minLength="10"
-                  maxLength="10"
-                  value={userUpi.upi}
-                  onChange={upiHandler}
-                />
-                <div class="form-text">
-                  We'll never share your Phone Number with anyone else.
+      {userUpi.show ? (
+        <Phonesuccess mydata={userUpi} />
+      ) : (
+        <Container>
+          <Row>
+            <Col>
+              <form className="phoneform" onSubmit={handleSubmit}>
+                <div class="mb-3">
+                  <label class="form-label">Enter The Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={userUpi.name}
+                    onChange={nameHandler}
+                  />
                 </div>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Enter The UPI</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    minLength="10"
+                    maxLength="10"
+                    value={userUpi.upi}
+                    onChange={upiHandler}
+                  />
+                  <div class="form-text">
+                    We'll never share your Phone Number with anyone else.
+                  </div>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Enter The Amount To Pay</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  onChange={amtHandle}
-                  value={userUpi.amt}
-                />
-              </div>
-
-              <button
-                type="submit"
-                class="btn btn-primary"
-                className="bankbutton"
-              >
-                Pay Now
-              </button>
-              <Link to="/">
-                {' '}
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  className="dashboard"
-                  onClick={returnBack}
+                <div class="mb-3">
+                  <label class="form-label">Enter The Amount To Pay</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    onChange={amtHandle}
+                    value={userUpi.amt}
+                  />
+                </div>
+                <Link
+                  to={{
+                    pathname: '/',
+                    state: { data: 'upi', val: userUpi },
+                  }}
                 >
-                  Return Back
-                </button>
-              </Link>
-            </form>
-          </Col>
-          <Col></Col>
-          <Col></Col>
-        </Row>
-      </Container>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    className="bankbutton"
+                  >
+                    Pay Now
+                  </button>{' '}
+                </Link>
+                <Link to="/">
+                  {' '}
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    className="dashboard"
+                  >
+                    Return Back
+                  </button>
+                </Link>
+              </form>
+            </Col>
+            <Col></Col>
+            <Col></Col>
+          </Row>
+        </Container>
+      )}
     </div>
   );
 }

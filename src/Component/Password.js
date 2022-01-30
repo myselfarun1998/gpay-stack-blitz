@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import './style.css';
 import { Button, Form, Container, Row, Col } from 'react-bootstrap';
-const Banksuccess = (props) => {
-  const returnBack = () => {
-    <Redirect to="/phone" />;
-  };
+import { useHistory, useLocation } from 'react-router-dom';
+const PassWord = (props) => {
+  const history = useHistory();
+  const location = useLocation();
   var count = 3;
   var valid = 'noerror';
   var defpwd = 'arun';
@@ -18,17 +18,14 @@ const Banksuccess = (props) => {
   const firstInput = (event) => {
     setpassword(event.target.value.toString());
   };
-  console.log(PassWord);
   // ---------------
   const secondInput = (event) => {
     setmypass1(event.target.value.toString());
   };
-  console.log(mypass1);
   // ---------------
   const thirdInput = (event) => {
     setmypass2(event.target.value.toString());
   };
-  console.log(mypass2);
   // ---------------
   const fourthInput = (event) => {
     setmypass3(event.target.value.toString());
@@ -38,13 +35,28 @@ const Banksuccess = (props) => {
   const validation = () => {
     if (defpwd === pwd) {
       valid = 'noerror';
-      // <Link to="/">{returnBack}</Link>;
-      console.log(valid);
-      console.log(pwd);
       setpassword(' ');
       setmypass1(' ');
       setmypass2(' ');
       setmypass3(' ');
+      if (location.state) {
+        console.log(location.state.data);
+        console.log(location.state.val);
+        if (location.state.data === 'bank') {
+          history.push({
+            pathname: '/banksuccess',
+            state: location.state.val,
+          });
+          // history.push("/banksuccess");
+        } else if (location.state.data === 'phone') {
+          history.push({
+            pathname: '/phonesuccess',
+            state: location.state.val,
+          });
+        }
+      } else {
+        history.push('/home');
+      }
     } else {
       valid = 'error';
       alert(`${--count}   attempts left`);
@@ -113,4 +125,4 @@ const Banksuccess = (props) => {
     </div>
   );
 };
-export default Banksuccess;
+export default PassWord;
